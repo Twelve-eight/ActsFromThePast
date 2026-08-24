@@ -16,13 +16,18 @@
 
     <ItemGroup>
       <Reference Include="sts2">
-        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
+        <HintPath>G:/steam/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll</HintPath>
       </Reference>
     </ItemGroup>
 
+    <!-- 本机移植：产物走 stage，不直接进 live mods（避免与工坊版同 id 冲突、避免污染运行环境） -->
+    <PropertyGroup>
+      <AftpStage>G:/omp works/aftp-stage/</AftpStage>
+    </PropertyGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2\mods\ActsFromThePast\&quot;" />
-      <Copy SourceFiles="ActsFromThePast.json" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2\mods\ActsFromThePast\"/>
+      <MakeDir Directories="$(AftpStage)"/>
+      <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(AftpStage)"/>
+      <Copy SourceFiles="ActsFromThePast.json" DestinationFolder="$(AftpStage)"/>
 
     </Target>
 
