@@ -51,7 +51,7 @@ public sealed class CursedTome : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {
@@ -110,7 +110,7 @@ public sealed class CursedTome : CustomEventModel
     private async Task Read()
     {
         AFTPModAudio.Play("events", "cursed_tome");
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             await CreatureCmd.Damage(
                 new ThrowingPlayerChoiceContext(),
@@ -144,11 +144,11 @@ public sealed class CursedTome : CustomEventModel
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
-            ActsFromThePastConfig.RebalancedMode ? DmgRebalanced : DmgPage1,
+            ActsFromThePastConfig.RebalancedModeEffective ? DmgRebalanced : DmgPage1,
             ValueProp.Unblockable | ValueProp.Unpowered,
             null, null);
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             AdvancePullAway();
             SetEventState(PageDescription("PAGE_2"), new[]
@@ -176,11 +176,11 @@ public sealed class CursedTome : CustomEventModel
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
-            ActsFromThePastConfig.RebalancedMode ? DmgRebalanced : DmgPage2,
+            ActsFromThePastConfig.RebalancedModeEffective ? DmgRebalanced : DmgPage2,
             ValueProp.Unblockable | ValueProp.Unpowered,
             null, null);
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             AdvancePullAway();
             SetEventState(PageDescription("PAGE_3"), new[]
@@ -208,11 +208,11 @@ public sealed class CursedTome : CustomEventModel
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
-            ActsFromThePastConfig.RebalancedMode ? DmgRebalanced : DmgPage3,
+            ActsFromThePastConfig.RebalancedModeEffective ? DmgRebalanced : DmgPage3,
             ValueProp.Unblockable | ValueProp.Unpowered,
             null, null);
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             AdvancePullAway();
             SetEventState(PageDescription("LAST_PAGE"), new[]
@@ -236,7 +236,7 @@ public sealed class CursedTome : CustomEventModel
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
-            ActsFromThePastConfig.RebalancedMode ? DmgRebalanced : DmgObtain,
+            ActsFromThePastConfig.RebalancedModeEffective ? DmgRebalanced : DmgObtain,
             ValueProp.Unblockable | ValueProp.Unpowered,
             null, null);
         var relic = GetRandomBook().ToMutable();

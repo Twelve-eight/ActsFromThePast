@@ -49,7 +49,7 @@ public sealed class WindingHalls : CustomEventModel
 
     private Task Continue()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             SetEventState(PageDescription("CHOICE"), new[]
             {
@@ -77,7 +77,7 @@ public sealed class WindingHalls : CustomEventModel
     {
         int count;
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             count = 1;
         }

@@ -30,14 +30,14 @@ public sealed class TheMausoleum : CustomEventModel
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
         return runState.Players.All(p => p.Relics.Any(r => r.IsTradable));
     }
 
     public override void CalculateVars()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             _sacrificeRelic = Rng.NextItem(Owner.Relics.Where(r => r.IsTradable));
             if (_sacrificeRelic != null)
@@ -52,7 +52,7 @@ public sealed class TheMausoleum : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {

@@ -30,7 +30,7 @@ public sealed class SecretPortal : CustomEventModel, IShrineEvent
     {
         if (RunManager.Instance.RunTime <= MinRunTimeSeconds)
             return false;
-        if (ActsFromThePastConfig.RebalancedMode && runState.Players.Count > 1)
+        if (ActsFromThePastConfig.RebalancedModeEffective && runState.Players.Count > 1)
             return false;
         return true;
     }
@@ -42,7 +42,7 @@ public sealed class SecretPortal : CustomEventModel, IShrineEvent
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {
@@ -60,7 +60,7 @@ public sealed class SecretPortal : CustomEventModel, IShrineEvent
 
     private async Task Enter()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             var concreteState = (RunState)Owner.RunState;
             var map = Owner.RunState.Map;

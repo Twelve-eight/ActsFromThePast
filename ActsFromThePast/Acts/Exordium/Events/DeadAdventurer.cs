@@ -80,7 +80,7 @@ public sealed class DeadAdventurer : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {

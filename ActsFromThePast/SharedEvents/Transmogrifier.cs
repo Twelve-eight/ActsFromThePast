@@ -30,7 +30,7 @@ public sealed class Transmogrifier : CustomEventModel, IShrineEvent
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {

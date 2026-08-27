@@ -60,7 +60,7 @@ public sealed class GoldenIdol : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             var relic = Rng.NextItem(GetTradableRelics());
             if (relic != null)
@@ -98,7 +98,7 @@ public sealed class GoldenIdol : CustomEventModel
         var relic = ModelDb.Relic<Relics.GoldenIdol>().ToMutable();
         await RelicCmd.Obtain(relic, Owner);
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             SetEventState(PageDescription("BOULDER_REBALANCED"), new[]
             {

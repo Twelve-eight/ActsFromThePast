@@ -24,7 +24,7 @@ public sealed class TombOfLordRedMask : CustomEventModel
     
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
 
         var fearful = ModelDb.Enchantment<Fearful>();
@@ -61,7 +61,7 @@ public sealed class TombOfLordRedMask : CustomEventModel
                 HoverTipFactory.FromRelic(ModelDb.Relic<RedMask>()).ToArray()));
         }
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(new EventOption(this, Run,
                 L10NLookup($"{Id.Entry}.pages.INITIAL_REBALANCED.options.RUN.title"),

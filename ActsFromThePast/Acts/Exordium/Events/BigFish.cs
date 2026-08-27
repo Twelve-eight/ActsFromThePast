@@ -36,7 +36,7 @@ public sealed class BigFish : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new EventOption[]
             {

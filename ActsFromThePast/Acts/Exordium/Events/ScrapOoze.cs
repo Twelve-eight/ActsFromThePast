@@ -58,7 +58,7 @@ public sealed class ScrapOoze : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {
@@ -76,7 +76,7 @@ public sealed class ScrapOoze : CustomEventModel
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
             return runState.Players.All<Player>(p => p.Gold >= DynamicVars.Gold.BaseValue);
 
         return true;

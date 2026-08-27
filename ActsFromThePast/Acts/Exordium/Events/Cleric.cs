@@ -52,7 +52,7 @@ public sealed class Cleric : CustomEventModel
                 $"{Id.Entry}.pages.INITIAL.options.PURIFY_LOCKED",
                 Array.Empty<IHoverTip>()));
 
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             options.Add(Option(Leave));
 
         return options;
@@ -81,7 +81,7 @@ public sealed class Cleric : CustomEventModel
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return runState.Players.All<Player>(p =>
                 p.Gold >= PurifyCost &&

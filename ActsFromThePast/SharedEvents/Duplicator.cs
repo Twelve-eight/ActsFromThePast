@@ -28,7 +28,7 @@ public sealed class Duplicator : CustomEventModel, IShrineEvent
     
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
 
         return runState.Players.All(p =>
@@ -37,7 +37,7 @@ public sealed class Duplicator : CustomEventModel, IShrineEvent
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {

@@ -24,7 +24,7 @@ public sealed class UpgradeShrine : CustomEventModel, IShrineEvent
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
 
         return runState.Players.All(p =>
@@ -51,7 +51,7 @@ public sealed class UpgradeShrine : CustomEventModel, IShrineEvent
                 Array.Empty<IHoverTip>()));
         }
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(Option(Kneel, "INITIAL_REBALANCED").ThatDoesDamage(KneelDamage));
         }

@@ -38,11 +38,11 @@ public sealed class MaskedBandits : CustomEventModel
     public override bool IsAllowed(IRunState runState) =>
         runState.TotalFloor >= 23 &&
         (!runState.Players.Any(p => p.Relics.Any(r => r is RedMask))
-         || ActsFromThePastConfig.RebalancedMode);
+         || ActsFromThePastConfig.RebalancedModeEffective);
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode
+        if (ActsFromThePastConfig.RebalancedModeEffective
             && Owner.RunState.Players.Count == 1
             && Owner.Relics.Any(r => r is RedMask))
         {

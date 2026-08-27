@@ -55,7 +55,7 @@ public sealed class Colosseum : CustomEventModel
         _combatSynchronizer?.ResetState();
         _combatSynchronizer?.InitializeForEvent(this);
     
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             SetEventState(
                 PageDescription("POST_SLAVERS"),

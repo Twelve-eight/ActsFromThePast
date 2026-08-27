@@ -35,7 +35,7 @@ public sealed class OminousForge : CustomEventModel, IShrineEvent
                 .Concat(HoverTipFactory.FromRelic<WarpedTongs>())
                 .ToArray()));
 
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(Option(Leave));
         }

@@ -31,7 +31,7 @@ public sealed class CouncilOfGhosts : CustomEventModel
     
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
         var haunted = ModelDb.Enchantment<Haunted>();
         return runState.Players.All(p =>
@@ -56,7 +56,7 @@ public sealed class CouncilOfGhosts : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {

@@ -60,11 +60,11 @@ public class MatchAndKeepMinigame
         Canonicals[1] = rng.NextItem(characterPool.Where(c => c.Rarity == CardRarity.Uncommon));
         Canonicals[2] = rng.NextItem(characterPool.Where(c => c.Rarity == CardRarity.Common));
 
-        Canonicals[3] = ActsFromThePastConfig.RebalancedMode
+        Canonicals[3] = ActsFromThePastConfig.RebalancedModeEffective
             ? (CardModel)ModelDb.Card<Guilty>()
             : rng.NextItem(cursePool);
 
-        Canonicals[4] = ActsFromThePastConfig.RebalancedMode
+        Canonicals[4] = ActsFromThePastConfig.RebalancedModeEffective
             ? (CardModel)ModelDb.Card<Guilty>()
             : rng.NextItem(cursePool);
 

@@ -16,7 +16,7 @@ namespace ActsFromThePast.Acts.Exordium.Events;
 
 public sealed class Sssserpent : CustomEventModel
 {
-    private static int GoldReward => ActsFromThePastConfig.RebalancedMode ? 250 : 150;
+    private static int GoldReward => ActsFromThePastConfig.RebalancedModeEffective ? 250 : 150;
 
     public override ActModel[] Acts => new[] { ModelDb.Act<ExordiumAct>() };
 
@@ -32,7 +32,7 @@ public sealed class Sssserpent : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {

@@ -43,7 +43,7 @@ public sealed class FaceTrader : CustomEventModel, IActRestricted, IShrineEvent
         
         // Unavailable in multiplayer. N'loth's Hungry ahh Face can cause issues
 
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
 
         return runState.Players.All(p =>
@@ -67,7 +67,7 @@ public sealed class FaceTrader : CustomEventModel, IActRestricted, IShrineEvent
             Option(Trade, "MAIN")
         };
 
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(Option(Leave, "MAIN"));
         }

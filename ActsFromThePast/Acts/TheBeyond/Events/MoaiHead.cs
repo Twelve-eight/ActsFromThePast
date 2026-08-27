@@ -63,7 +63,7 @@ public sealed class MoaiHead : CustomEventModel
                 $"{Id.Entry}.pages.INITIAL.options.OFFER_IDOL_LOCKED",
                 Array.Empty<IHoverTip>()));
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(Option(Harvest, "INITIAL_REBALANCED",
                 new[] { HoverTipFactory.FromPotion(ModelDb.Potion<RegenPotion>()) }));

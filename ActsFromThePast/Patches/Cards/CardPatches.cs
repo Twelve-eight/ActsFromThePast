@@ -14,6 +14,8 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Nodes;
@@ -91,6 +93,16 @@ public class ClassicSlimedOnPlayPatch
 {
     public static bool Prefix(Slimed __instance, PlayerChoiceContext choiceContext, CardPlay cardPlay, ref Task __result)
     {
+        // (fork fix 2026-08-27) IsClassicSlimed is a local ConditionalWeakTable marker set only on
+        // the creating peer (TagClassicSlimedPatch on ToMutable). The remote peer rebuilds the card
+        // over the network without the marker, so in MP the same card resolves to different
+        // behavior on the two ends (one exhausts-only, the other draws) and the run desyncs
+        // (evidence: divergence #28/#286 — Slimed play → Hand/Draw off by one → disconnect).
+        // Multiplayer runs therefore never replace OnPlay; the vanilla draw behavior is identical
+        // on both ends. Singleplayer keeps the classic variant.
+        if (RunManager.Instance is { } rm && rm.NetService.Type != NetGameType.Singleplayer)
+            return true;
+
         if (!ClassicSlimedTracker.IsClassicSlimed.Get(__instance))
             return true;
 

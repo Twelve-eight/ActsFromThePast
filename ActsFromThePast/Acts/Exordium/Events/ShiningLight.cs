@@ -62,7 +62,7 @@ public sealed class ShiningLight : CustomEventModel
                 $"{Id.Entry}.pages.INITIAL.options.ENTER_LOCKED",
                 Array.Empty<IHoverTip>()));
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             if (HasEnchantableAttack())
                 options.Add(Option(Bask, "INITIAL",
@@ -131,7 +131,7 @@ public sealed class ShiningLight : CustomEventModel
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
 
         var burnBright = ModelDb.Enchantment<BurnBright>();

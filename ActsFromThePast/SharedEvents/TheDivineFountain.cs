@@ -25,7 +25,7 @@ public sealed class TheDivineFountain : CustomEventModel, IShrineEvent
 
     public override void CalculateVars()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             var curseCount = Owner.Deck.Cards.Count(c => c.Type == CardType.Curse);
             DynamicVars["MaxHpGain"].BaseValue = curseCount * MaxHpPerCurse;
@@ -41,7 +41,7 @@ public sealed class TheDivineFountain : CustomEventModel, IShrineEvent
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {

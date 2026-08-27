@@ -31,7 +31,7 @@ public sealed class WingStatue : CustomEventModel
 
     public override void CalculateVars()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
             DynamicVars.Gold.BaseValue = RebalancedMinGold + Rng.NextInt(RebalancedMaxGold - RebalancedMinGold + 1);
         else
             DynamicVars.Gold.BaseValue = MinGold + Rng.NextInt(MaxGold - MinGold + 1);
@@ -52,7 +52,7 @@ public sealed class WingStatue : CustomEventModel
             Option(Agree).ThatDoesDamage(Damage)
         };
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(Option(Attack));
         }

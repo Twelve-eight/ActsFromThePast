@@ -47,7 +47,7 @@ public sealed class Vampires : CustomEventModel
         if (HasBloodVial())
             options.Add(Option(Vial, "INITIAL", HoverTipFactory.FromCard(ModelDb.Card<Bite>())));
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
             options.Add(Option(Hesitate, "INITIAL_REBALANCED", HoverTipFactory.FromRelic<BloodBank>().ToArray()));
         else
             options.Add(Option(Leave));

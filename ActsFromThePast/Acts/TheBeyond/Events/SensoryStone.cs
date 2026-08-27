@@ -24,8 +24,8 @@ public sealed class SensoryStone : CustomEventModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
-        new IntVar("Dmg2", ActsFromThePastConfig.RebalancedMode ? Dmg2Rebalanced : Dmg2),
-        new IntVar("Dmg3", ActsFromThePastConfig.RebalancedMode ? Dmg3Rebalanced : Dmg3)
+        new IntVar("Dmg2", ActsFromThePastConfig.RebalancedModeEffective ? Dmg2Rebalanced : Dmg2),
+        new IntVar("Dmg3", ActsFromThePastConfig.RebalancedModeEffective ? Dmg3Rebalanced : Dmg3)
     };
 
     public override void OnRoomEnter()
@@ -40,8 +40,8 @@ public sealed class SensoryStone : CustomEventModel
 
     private Task Continue()
     {
-        int dmg2 = ActsFromThePastConfig.RebalancedMode ? Dmg2Rebalanced : Dmg2;
-        int dmg3 = ActsFromThePastConfig.RebalancedMode ? Dmg3Rebalanced : Dmg3;
+        int dmg2 = ActsFromThePastConfig.RebalancedModeEffective ? Dmg2Rebalanced : Dmg2;
+        int dmg3 = ActsFromThePastConfig.RebalancedModeEffective ? Dmg3Rebalanced : Dmg3;
 
         SetEventState(PageDescription("INTRO_2"), new[]
         {
@@ -61,8 +61,8 @@ public sealed class SensoryStone : CustomEventModel
     private async Task Memory(int choice)
     {
         // TODO add 50/50 chance for rare colorless
-        int dmg2 = ActsFromThePastConfig.RebalancedMode ? Dmg2Rebalanced : Dmg2;
-        int dmg3 = ActsFromThePastConfig.RebalancedMode ? Dmg3Rebalanced : Dmg3;
+        int dmg2 = ActsFromThePastConfig.RebalancedModeEffective ? Dmg2Rebalanced : Dmg2;
+        int dmg3 = ActsFromThePastConfig.RebalancedModeEffective ? Dmg3Rebalanced : Dmg3;
 
         if (choice == 2)
         {

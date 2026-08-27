@@ -33,7 +33,7 @@ public sealed class GoldenShrine : CustomEventModel, IShrineEvent
                 HoverTipFactory.FromCardWithCardHoverTips<Regret>().ToArray())
         };
 
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(Option(Leave));
         }

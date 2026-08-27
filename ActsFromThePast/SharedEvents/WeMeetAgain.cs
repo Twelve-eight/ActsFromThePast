@@ -34,7 +34,7 @@ public sealed class WeMeetAgain : CustomEventModel, IShrineEvent
     
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
 
         return runState.Players.All(p =>
@@ -147,7 +147,7 @@ public sealed class WeMeetAgain : CustomEventModel, IShrineEvent
         }
 
         // Attack
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
         {
             options.Add(Option(Attack));
         }

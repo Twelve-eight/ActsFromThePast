@@ -25,14 +25,14 @@ public sealed class PleadingVagrant : CustomEventModel
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (!ActsFromThePastConfig.RebalancedMode)
+        if (!ActsFromThePastConfig.RebalancedModeEffective)
             return true;
         return runState.Players.All(p => p.Gold >= GoldCostRebalanced);
     }
 
     public override void CalculateVars()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
             DynamicVars["GoldCost"].BaseValue = GoldCostRebalanced;
     }
 
@@ -43,7 +43,7 @@ public sealed class PleadingVagrant : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
         {
             return new[]
             {
@@ -66,7 +66,7 @@ public sealed class PleadingVagrant : CustomEventModel
 
     private async Task PayGold()
     {
-        var cost = ActsFromThePastConfig.RebalancedMode ? GoldCostRebalanced : GoldCost;
+        var cost = ActsFromThePastConfig.RebalancedModeEffective ? GoldCostRebalanced : GoldCost;
         await PlayerCmd.LoseGold(cost, Owner);
         var relic = RelicFactory.PullNextRelicFromFront(Owner).ToMutable();
         await RelicCmd.Obtain(relic, Owner);

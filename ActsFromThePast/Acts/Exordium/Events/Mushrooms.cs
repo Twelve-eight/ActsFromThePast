@@ -42,14 +42,14 @@ public sealed class Mushrooms : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
-        var eatHoverTips = ActsFromThePastConfig.RebalancedMode
+        var eatHoverTips = ActsFromThePastConfig.RebalancedModeEffective
             ? HoverTipFactory.FromCardWithCardHoverTips<SporeMind>().ToArray()
             : HoverTipFactory.FromCardWithCardHoverTips<Parasite>().ToArray();
 
         return new[]
         {
             Option(Fight),
-            Option(Eat, ActsFromThePastConfig.RebalancedMode ? "INITIAL_REBALANCED" : "INITIAL", eatHoverTips)
+            Option(Eat, ActsFromThePastConfig.RebalancedModeEffective ? "INITIAL_REBALANCED" : "INITIAL", eatHoverTips)
         };
     }
 
@@ -79,7 +79,7 @@ public sealed class Mushrooms : CustomEventModel
             Owner.Creature,
             DynamicVars["HealAmount"].BaseValue);
 
-        if (ActsFromThePastConfig.RebalancedMode)
+        if (ActsFromThePastConfig.RebalancedModeEffective)
             await CardPileCmd.AddCurseToDeck<SporeMind>(Owner);
         else
             await CardPileCmd.AddCurseToDeck<Parasite>(Owner);
