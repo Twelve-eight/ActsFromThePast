@@ -22,7 +22,7 @@ public class DarvPatches
 
     public static void Postfix(ActModel __instance)
     {
-        if (!ActsFromThePastConfig.DarvOnlyInLegacyActs)
+        if (!ActsFromThePastConfig.DarvOnlyInLegacyActsEffective)
             return;
 
         if (__instance is not TheCityAct and not TheBeyondAct)
@@ -49,7 +49,7 @@ public class DarvUniqueOffersPatch
 
     public static bool Prefix(Darv __instance, ref IReadOnlyList<EventOption> __result)
     {
-        if (!ActsFromThePastConfig.DarvOnlyInLegacyActs)
+        if (!ActsFromThePastConfig.DarvOnlyInLegacyActsEffective)
             return true;
 
         var owner = __instance.Owner;
