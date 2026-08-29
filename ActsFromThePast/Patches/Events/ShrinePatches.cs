@@ -57,10 +57,10 @@ public static class EventPoolPatch
 
         // --- Phase 1: Filter ---
 
-        if (IsLegacyAct(__instance) && !ActsFromThePastConfig.AllowNonLegacySharedEventsInLegacyActs)
+        if (IsLegacyAct(__instance) && !ActsFromThePastConfig.AllowNonLegacySharedEventsInLegacyActsEffective)
             rooms.events.RemoveAll(e => IsBaseGameSharedEvent(e));
 
-        if (!IsLegacyAct(__instance) && !ActsFromThePastConfig.AllowLegacySharedEventsInNonLegacyActs)
+        if (!IsLegacyAct(__instance) && !ActsFromThePastConfig.AllowLegacySharedEventsInNonLegacyActsEffective)
             rooms.events.RemoveAll(e => IsModSharedEvent(e));
 
         int actNumber = GetActNumber(__instance);

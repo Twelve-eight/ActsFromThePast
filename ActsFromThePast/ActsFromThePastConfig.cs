@@ -31,6 +31,19 @@ public class ActsFromThePastConfig : SimpleModConfig
     // power model spawns — same class of local-config divergence as RebalancedMode.
     public static bool LegacyEnemiesGiveClassicSlimedEffective =>
             RunManager.Instance is { } rm && rm.NetService.Type == NetGameType.Singleplayer && LegacyEnemiesGiveClassicSlimed;
+
+    // MP-safe accessor (fork fix 2026-08-29, family-D candidate): the shared-event
+    // filters in ShrinePatches run inside ActModel.GenerateRooms, which executes
+    // symmetrically on BOTH peers (StartNewMultiplayerRun has no host/client branch —
+    // NCharacterSelectScreen.cs L726-790, both peers drive State.Rng.UpFront from the
+    // same seed). A filter gated on a raw local config therefore removes different
+    // events from each peer's room pool → different event rooms → map divergence.
+    // MP keeps the vanilla (unfiltered) concat on both peers.
+    public static bool AllowNonLegacySharedEventsInLegacyActsEffective =>
+            RunManager.Instance is { } rm && rm.NetService.Type == NetGameType.Singleplayer && AllowNonLegacySharedEventsInLegacyActs;
+
+    public static bool AllowLegacySharedEventsInNonLegacyActsEffective =>
+            RunManager.Instance is { } rm && rm.NetService.Type == NetGameType.Singleplayer && AllowLegacySharedEventsInNonLegacyActs;
     
     [ConfigHoverTip]
     public static bool AllowNonLegacySharedEventsInLegacyActs { get; set; } = true;
