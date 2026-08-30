@@ -32,18 +32,24 @@ public class ActsFromThePastConfig : SimpleModConfig
     public static bool LegacyEnemiesGiveClassicSlimedEffective =>
             RunManager.Instance is { } rm && rm.NetService.Type == NetGameType.Singleplayer && LegacyEnemiesGiveClassicSlimed;
 
-    // MP-safe accessor (fork fix 2026-08-29, family-D candidate): the shared-event
-    // filters in ShrinePatches run inside ActModel.GenerateRooms, which executes
-    // symmetrically on BOTH peers (StartNewMultiplayerRun has no host/client branch —
-    // NCharacterSelectScreen.cs L726-790, both peers drive State.Rng.UpFront from the
-    // same seed). A filter gated on a raw local config therefore removes different
-    // events from each peer's room pool → different event rooms → map divergence.
-    // MP keeps the vanilla (unfiltered) concat on both peers.
+    // MP-safe accessor (fork fix 2026-08-29, family-D candidate; polarity fixed
+    // 2026-08-30 after review): the shared-event filters in ShrinePatches run inside
+    // ActModel.GenerateRooms, which executes symmetrically on BOTH peers
+    // (StartNewMultiplayerRun has no host/client branch - NCharacterSelectScreen.cs
+    // L726-790, both peers drive State.Rng.UpFront from the same seed). A filter
+    // gated on a raw local config therefore removes different events from each
+    // peer's room pool -> different event rooms -> map divergence.
+    // MP keeps the vanilla (unfiltered) concat on both peers. These are ALLOW
+    // flags consumed under negation (!Effective -> RemoveAll fires), so in MP they
+    // must return TRUE (allow) to suppress the filter - returning false (the plain
+    // enable-flag pattern) inverted the intent and always fired the filter in MP.
     public static bool AllowNonLegacySharedEventsInLegacyActsEffective =>
-            RunManager.Instance is { } rm && rm.NetService.Type == NetGameType.Singleplayer && AllowNonLegacySharedEventsInLegacyActs;
+            (RunManager.Instance is { } rm && rm.NetService.Type != NetGameType.Singleplayer)
+            || AllowNonLegacySharedEventsInLegacyActs;
 
     public static bool AllowLegacySharedEventsInNonLegacyActsEffective =>
-            RunManager.Instance is { } rm && rm.NetService.Type == NetGameType.Singleplayer && AllowLegacySharedEventsInNonLegacyActs;
+            (RunManager.Instance is { } rm && rm.NetService.Type != NetGameType.Singleplayer)
+            || AllowLegacySharedEventsInNonLegacyActs;
     
     [ConfigHoverTip]
     public static bool AllowNonLegacySharedEventsInLegacyActs { get; set; } = true;
