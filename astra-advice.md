@@ -1,0 +1,30 @@
+# Astra advice - AFTP 本地分支
+
+日期: 2026-09-12. 本目录是 ActsFromThePast 本地分支, 不是 sts2-spire1 的产品根. 当前 Git remote 为 Twelve-eight/ActsFromThePast. 本轮仅确认参考地位/入口与跨模组调用, 未逐个怪物/事件全审, 未构建/部署此 AFTP 主包.
+
+## 第一原则
+
+README 第一行已经说明 GitHub 仓库不再随发布更新, 最新版本在 Steam. 当前实际工坊 DLL 的控制流才是兼容补丁的目标. 不从这个目录的同名方法推出当前 DLL 一定相同.
+
+Spire1 的用户方向是 AFTP 提供场景/幕, Spire1 提供角色/卡/遗物互操作. 不在本仓重新实现已冻结的地牢开发路线, 不删除 AFTP 特有内容来让 Spire1 的测试通过.
+
+## 接手时的决定顺序
+
+1. 确认问题属于上游 AFTP, 本地 fork, 还是外部兼容补丁. 三者的交付路径不同.
+2. 记录实际被加载的路径, manifest 和 DLL SHA256; `../astra-advice-evidence/2026-09-12/binary-inputs.json` 是本次快照.
+3. 对拟修改符号对比当前工坊反编译, 找到具体版本差异. 不把旧 GitHub 源直接替换当前 DLL.
+4. 若已有用户约定生态补丁放 Spire1, 保持该边界. 只有用户明确要求更新 fork 才在此修改发布.
+5. 修复异步怪物动作, 必须保留原 Task 的完成顺序; 错误示例见 `../aftp-ActsFromThePastMultiplayerBalance/astra-advice.md` 的 RebirthMove.
+
+## 核心风险
+
+- 旧分支与工坊资产/模型 ID/场景 paths 未必同版. 单独 DLL 更新可能与 PCK 场景脚本不一致.
+- Act4Heart 改写幕终局条件, Spire1 又补第三幕奖励; 主包更新会改变补丁成立条件, 需要四幕有钥匙/无钥匙/纯三幕矩阵.
+- ClassicSlimed 等本地附加字段若没进序列化, 主客机可能不一致. 本轮没有对历史此问题做新的二进制回归, 不称已修或仍复现.
+- 事件选单 UI 的自动化卡住不等于事件语义错误; 先区分 AutoSlay overlay handler 与真人交互.
+
+## 推荐证据
+
+实际 monster move/状态转换, 掉落/事件触发, 两端模型与状态一致, 所有资产同版, 存读档不产生 Deprecated 模型. 原始反编译与游戏资产只留本机, 公开建议使用去原文化事实/索引.
+
+本目录没有本轮新发现的逐行问题清单, 不能将其标成全面 green. 全工作区优先风险和执行方法见 [总索引](../astra-advice.md).
