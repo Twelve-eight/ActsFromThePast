@@ -1,3 +1,11 @@
+## 第四轮来源复核 (2026-09-14)
+
+本仓 HEAD `5babd71`, 与 `aftp-upstream` 参考树各 348 个 C# 文件, 46 个文件内容不同. 五项配置的 `Effective` getter 在 MP 强制部分功能关闭/事件允许, 是既有保守配置策略, 不是当前 MpConfigSync 的主机快照协议. 不宜整体搬入下游.
+
+本轮评估主文在 [AFTP 下游补丁建议](../aftp-upstream/astra-advice.md). Burn+ 重建失败和 Classic Slimed 复制/保存丢标记已在当前工坊 DLL 隔离复现; 本仓同名相关代码仍有相同结构. 特效退出, minigame 奖励完成链和视觉分配候选分别注明 SOURCE/未验证边界.
+
+未构建/部署本仓 fork, 未操作游戏. 下游先用既有 Spire1 可选兼容层, 不用旧源码 DLL 覆盖工坊主包. 以下为历史建议.
+
 # Astra advice - AFTP 本地分支
 
 日期: 2026-09-12. 本目录是 ActsFromThePast 本地分支, 不是 sts2-spire1 的产品根. 当前 Git remote 为 Twelve-eight/ActsFromThePast. 本轮仅确认参考地位/入口与跨模组调用, 未逐个怪物/事件全审, 未构建/部署此 AFTP 主包.
