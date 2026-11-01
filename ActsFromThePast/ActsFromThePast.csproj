@@ -22,7 +22,7 @@
 
     <!-- 本机移植：产物走 stage，不直接进 live mods（避免与工坊版同 id 冲突、避免污染运行环境） -->
     <PropertyGroup>
-      <AftpStage>G:/omp works/aftp-stage/</AftpStage>
+      <AftpStage>G:/omp works/Sts/_staging/aftp-stage/</AftpStage>
     </PropertyGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <MakeDir Directories="$(AftpStage)"/>
