@@ -18,6 +18,11 @@ Some enemies have been given visual & auditory touchups to help them feel a bit 
 
 Rebalanced Mode is a config (disabled by default) that changes Slay the Spire 1 events to bring them up to Slay the Spire 2 standards. The goals of this mode include removing ALL leave buttons and generally buffing events to make them more positive on average.
 
+Rebalanced Mode is a singleplayer-only setting. In multiplayer this option is not applied and the
+vanilla event behaviour is used on every peer, so that players with different local settings cannot
+desynchronise the run. The same applies to "Only Darv for Legacy Acts" and
+"Legacy Enemies Give Classic Slimed", which are likewise read as disabled during multiplayer.
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/30d7f286-888c-4364-a964-cd1863c1b49c" />
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9e374caa-02c7-4155-966f-8994fb56e71e" />
